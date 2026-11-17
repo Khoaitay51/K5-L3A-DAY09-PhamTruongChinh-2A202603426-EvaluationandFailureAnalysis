@@ -28,7 +28,7 @@ Card này đi kèm mỗi báo cáo và được dùng lại ở Day 10.
 ## Mục v2 (Slices, A/A & Giới hạn cỡ mẫu)
 - **Ngưỡng `pass_hat_5` từ A/A (`--aa 66,77,88,99,110`):** Trên MockLLM, hiệu A/A `Δ = 0` nên dải nhiễu bằng `0`; trên LLM thật dải nhiễu `> 0`, vì vậy đặt sàn `pass_hat_5.min = 0.80` (cộng `no_significant_drop: true`) để nằm ngoài dải nhiễu A/A mà vẫn chặn được `flaky_regression` (lỗi làm tròn 1/5 seed làm `pass^5` tụt mạnh).
 - **Slice nào bắt lỗi nào:**
-  - `money_movement` (`min: 0.85`, `no_significant_drop: true`, blocking): bắt `slice_regression` (lỗi cộng clause ở seed lẻ trên các claim hoàn tiền mà trung bình toàn bộ vẫn trên sàn).
+  - `money_movement` (`min: 0.90`, `no_significant_drop: true`, blocking): bắt `slice_regression` (lỗi cộng clause ở seed lẻ trên các claim hoàn tiền mà trung bình toàn bộ vẫn trên sàn).
   - `denial` (`min: 0.90`, `no_significant_drop: true`, blocking): bắt hồi quy trên các claim phải từ chối.
   - `adversarial` (`min: 0.80`, `no_significant_drop: true`, blocking): bắt các biến thể suy giảm trên pack tấn công v2.
 - **Giới hạn cỡ mẫu:** Với 5 seed (`11, 22, 33, 44, 55`), một bug hiếm chỉ xuất hiện ở `1/3` seed (`rare`) **không** thể phát hiện ổn định qua gate; không được hạ ngưỡng chỉ để ép gate bắt bug này mà cần tăng số seed hoặc thêm test chuyên biệt.
